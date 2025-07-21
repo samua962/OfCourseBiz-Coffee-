@@ -3,10 +3,15 @@ import { Link } from "react-router-dom";
 import { Minus, Plus, Trash2, ShoppingBag } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useCart } from "../context/CartContext";
+// Import this from your AuthContext
+import { useAuth } from "../context/AuthContext"; // Ensure you have this context for authentication
+import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
   const { cartItems, updateQuantity, removeFromCart, getCartTotal } = useCart();
   const { subtotal, tax, total } = getCartTotal();
+  const { user } = useAuth();
+  const navigate = useNavigate();
 
   const containerVariants = {
     hidden: {},
@@ -193,16 +198,22 @@ const Cart = () => {
             </div>
 
             <div className="mt-6 space-y-3">
-              <Link to="/checkout">
-                <motion.button
-                  whileHover={{ scale: 1.03 }}
-                  whileTap={{ scale: 0.97 }}
-                  className="w-full bg-amber-600 text-white py-3 rounded-lg font-semibold hover:bg-amber-700 flex items-center justify-center transition"
-                >
-                  <ShoppingBag className="h-5 w-5 mr-2" />
-                  Proceed to Checkout
-                </motion.button>
-              </Link>
+              <motion.button
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
+                onClick={() => {
+                  if (!user) {
+                    navigate("/login"); // or "/signin" based on your routing
+                  } else {
+                    navigate("/checkout");
+                  }
+                }}
+                className="w-full bg-amber-600 text-white py-3 rounded-lg font-semibold hover:bg-amber-700 flex items-center justify-center transition"
+              >
+                <ShoppingBag className="h-5 w-5 mr-2" />
+                Proceed to Checkout
+              </motion.button>
+
               <Link to="/checkout">
                 <motion.button
                   whileHover={{ scale: 1.03 }}
@@ -224,5 +235,4 @@ const Cart = () => {
     </div>
   );
 };
-
 export default Cart;
