@@ -45,7 +45,37 @@ A modern coffee shop web application that allows users to explore menus, reserve
 ---
 
 ## 📷 Screenshots
+### Home
+<img src="https://github.com/samua962/OfCourseBiz-Coffee-/blob/main/screenshots/home.png" alt="Description" width="700">
 
+
+### Service 
+<img src="https://github.com/samua962/OfCourseBiz-Coffee-/blob/main/screenshots/service.png" alt="Description" width="700">
+
+
+
+### Info Center
+<img src="https://github.com/samua962/OfCourseBiz-Coffee-/blob/main/screenshots/info center.png" alt="Description" width="700">
+
+
+
+### Menu
+<img src="https://github.com/samua962/OfCourseBiz-Coffee-/blob/main/screenshots/menu.png" alt="Description" width="700">
+
+
+
+### Reserve
+<img src="https://github.com/samua962/OfCourseBiz-Coffee-/blob/main/screenshots/reserve.png" alt="Description" width="700">
+
+
+
+### Cart
+<img src="https://github.com/samua962/OfCourseBiz-Coffee-/blob/main/screenshots/cart.png" alt="Description" width="700">
+
+
+
+### Checkout
+<img src="https://github.com/samua962/OfCourseBiz-Coffee-/blob/main/screenshots/checkout.png" alt="Description" width="700">
 
 
 ---
@@ -56,7 +86,7 @@ A modern coffee shop web application that allows users to explore menus, reserve
 
 ## 📂 Source Code
 
-https://github.com/samua962/reactCoffee
+https://github.com/samua962/OfCourseBiz-Coffee-
 
 ---
 
