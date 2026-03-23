@@ -14,23 +14,44 @@ const InfoCenter = () => {
 
   const NEWS_API_KEY = '3859bb0d37bd442dbcf572c7bae0ef1a';
 
+  // const getNewQuote = async () => {
+  //   setIsLoading(prev => ({ ...prev, quote: true }));
+  //   try {
+  //     const res = await fetch("https://favqs.com/api/qotd");
+  //     const data = await res.json();
+  //     setCurrentQuote({ text: data.content, author: data.author });
+  //   } catch (error) {
+  //     setCurrentQuote({ text: "Failed to fetch quote.", author: "API Error" });
+  //   }
+  //   setIsLoading(prev => ({ ...prev, quote: false }));
+  // };
+
+
   const getNewQuote = async () => {
-    setIsLoading(prev => ({ ...prev, quote: true }));
-    try {
-      const res = await fetch("http://api.quotable.io/random");
-      const data = await res.json();
-      setCurrentQuote({ text: data.content, author: data.author });
-    } catch (error) {
-      setCurrentQuote({ text: "Failed to fetch quote.", author: "API Error" });
+  setIsLoading(prev => ({ ...prev, quote: true }));
+  try {
+    const res = await fetch("https://api.allorigins.win/raw?url=https://zenquotes.io/api/random");
+    const text = await res.text();
+    const data = JSON.parse(text);
+
+    if (Array.isArray(data) && data.length > 0) {
+      setCurrentQuote({ text: data[0].q, author: data[0].a });
+    } else {
+      throw new Error("Invalid quote response");
     }
+  } catch (error) {
+    console.error("Error fetching quote:", error);
+    setCurrentQuote({ text: "Failed to fetch quote.", author: "API Error" });
+  } finally {
     setIsLoading(prev => ({ ...prev, quote: false }));
-  };
+  }
+};
 
   const fetchNews = async () => {
     setIsLoading(prev => ({ ...prev, news: true }));
     setNewsError(null);
     try {
-      const response = await fetch(`http://newsapi.org/v2/everything?q=ethiopian&pageSize=5&apiKey=${NEWS_API_KEY}`);
+      const response = await fetch(`https://newsapi.org/v2/everything?q=ethiopian&pageSize=5&apiKey=${NEWS_API_KEY}`);
       const data = await response.json();
       if (data.status === "ok") {
         setNews(data.articles);
@@ -212,13 +233,6 @@ const InfoCenter = () => {
                 ))
               )}
             </div>
-              <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="mt-6 w-full bg-gradient-to-r from-amber-800 to-amber-900 text-white py-3 rounded-lg font-semibold hover:shadow-lg transition-all duration-300"
-            onClick={() => navigate("/blogs")}>
-              View All Blogs
-            </motion.button>
           </motion.div>
         </div>
       </div>
